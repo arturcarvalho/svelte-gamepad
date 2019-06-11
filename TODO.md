@@ -1,4 +1,5 @@
-- onConnet not triggering for next gamepads
+
+- add more gamepad layouts?
 - Instead of scanning for gamepads on every loop, do it on connect/disconnect (is this possible everywhere?)
 - Test on Safari
   - check if rAF is called correctly
