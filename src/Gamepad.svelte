@@ -9,30 +9,41 @@
   const dispatch = createEventDispatcher();
   let gamepadState = null;
 
-  function onChange(data) {
+  function onChange(newGamepadState) {
     if (!gamepadState) {
       dispatch("Connected", { gamepadIndex });
     }
 
-    gamepadState = { ...data };
-
     // handle buttons
-    Object.keys(gamepadState.buttons).forEach(key => {
-      const button = gamepadState[key];
+    Object.keys(newGamepadState.buttons).forEach(key => {
+      const button = newGamepadState.buttons[key];
 
       if (button && button.pressed) {
-        dispatch(key, btn);
+        dispatch(key, button); // e.g. "RT" , {pressed: true, value: 0.2}
+      }
+
+      // Send null when player stops pressing button
+      // Needs to check if the previous state is marked as pressed
+      if (
+        button &&
+        !button.pressed &&
+        gamepadState &&
+        gamepadState.buttons[key].pressed
+      ) {
+        dispatch(key, null);
       }
     });
 
     // handle axes
-    Object.keys(gamepadState.axes).forEach(key => {
-      const axis = gamepadState.axes[key];
+    Object.keys(newGamepadState.axes).forEach(key => {
+      const axis = newGamepadState.axes[key];
 
       if (axis) {
-        dispatch(key, axis); // "LeftStick" , {x: 10, y:0}
+        dispatch(key, axis); // e.g. "LeftStick" , {x: 10, y:0}
       }
     });
+
+    gamepadState = { ...newGamepadState };
   }
 
   const args = {
@@ -42,32 +53,7 @@
   };
 
   onMount(() => {
-    console.log("mount");
     const cleanup = addGamepad(gamepadIndex, args);
-
     return cleanup;
   });
 </script>
-
-<style>
-  .rt {
-    width: 20px;
-    height: 20px;
-    background: red;
-  }
-</style>
-
-<div>Gamepad {gamepadIndex}</div>
-<div>
-  A:
-  {#if gamepadState && gamepadState.buttons && gamepadState.buttons.A}
-    {gamepadState.buttons.A.pressed}
-  {/if}
-</div>
-
-<div>
-  RT:
-  {#if gamepadState && gamepadState.buttons.RT}
-    <div class="rt" style="width:{gamepadState.buttons.RT.value * 200}px" />
-  {/if}
-</div>

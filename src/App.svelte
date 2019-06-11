@@ -1,30 +1,41 @@
 <script>
   import Gamepad from "./Gamepad.svelte";
 
-  let leftAxis = { x: 0, y: 0 };
-  let rightAxis = { x: 0, y: 0 };
+  let state = {
+    leftAxis: { x: 0, y: 0 },
+    rightAxis: { x: 0, y: 0 },
+    buttons: {}
+  };
 
   function gamepadConnected(event) {
     console.log(`app: gamepad ${event.detail.gamepadIndex} connected`);
   }
   function APressed(event) {
+    state.buttons["A"] = event.detail;
     console.log("A pressed");
   }
 
   function RTPressed(event) {
-    console.log("RT pressed", event.detail.value);
+    state.buttons["RT"] = event.detail;
+    console.log(event.detail);
+    console.log("RT pressed");
   }
 
   function LeftStick(event) {
-    leftAxis = event.detail;
+    state.leftAxis = event.detail;
   }
 
   function RightStick(event) {
-    rightAxis = event.detail;
+    state.rightAxis = event.detail;
   }
 </script>
 
 <style>
+  .rt {
+    width: 20px;
+    height: 20px;
+    background: red;
+  }
   h1 {
     color: purple;
   }
@@ -63,18 +74,40 @@
   on:RightStick={RightStick} />
 
 <div class="stick-container">
-  <span class="stick stick-go-left" style="left:{100 + leftAxis.x * 100}px" />
-  <span class="stick stick-go-right" style="right:{100 - leftAxis.x * 100}px" />
-</div>
-
-<div class="stick-container">
-  <span class="stick stick-go-left" style="left:{100 + leftAxis.y * 100}px" />
-  <span class="stick stick-go-right" style="right:{100 - leftAxis.y * 100}px" />
-</div>
-
-<div class="stick-container">
-  <span class="stick stick-go-left" style="left:{100 + rightAxis.x * 100}px" />
+  <span
+    class="stick stick-go-left"
+    style="left:{100 + state.leftAxis.x * 100}px" />
   <span
     class="stick stick-go-right"
-    style="right:{100 - rightAxis.x * 100}px" />
+    style="right:{100 - state.leftAxis.x * 100}px" />
+</div>
+
+<div class="stick-container">
+  <span
+    class="stick stick-go-left"
+    style="left:{100 + state.leftAxis.y * 100}px" />
+  <span
+    class="stick stick-go-right"
+    style="right:{100 - state.leftAxis.y * 100}px" />
+</div>
+
+<div class="stick-container">
+  <span
+    class="stick stick-go-left"
+    style="left:{100 + state.rightAxis.x * 100}px" />
+  <span
+    class="stick stick-go-right"
+    style="right:{100 - state.rightAxis.x * 100}px" />
+</div>
+
+<div>
+  A:
+  {#if state.buttons.A}{state.buttons.A.value}{/if}
+</div>
+
+<div>
+  RT:
+  {#if state && state.buttons.RT}
+    <div class="rt" style="width:{state.buttons.RT.value * 200}px" />
+  {/if}
 </div>

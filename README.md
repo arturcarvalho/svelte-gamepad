@@ -44,6 +44,21 @@ dev server => npm run dev
 
 # API
 
+**stickThreshold**
+
+Threshold above which `LeftStick` and `RightStick` are triggered.
+**Default: 0.2**.
+
+**Functions**
+
+## Buttons
+
+Each button gets a GameButton that has a:
+
+- pressed: boolean
+- touched: boolean
+- value: decimal
+
 ```
 on: A
 on: B
@@ -62,8 +77,14 @@ on: DPadDown
 on: DPadLeft
 on: DPadRight
 
+
+## Sticks
+Each stick gets an object with an x and y in the interval [-1, 1].
+```
+
 on: LeftStick
 on: RightStick
+
 ```
 
 # Info
@@ -84,3 +105,4 @@ https://github.com/SBRK/react-gamepad
 
 - Going to use the react-gamepad strategy to connect/disconnect. Basically check if there are navigator.getGamepads().
 - The name comes from svelte + gamepad.
+```
