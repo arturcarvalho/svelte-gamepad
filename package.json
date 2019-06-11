@@ -1,6 +1,20 @@
 {
   "name": "svelte-app",
-  "version": "1.0.0",
+  "description": "A Gamepad handler as a Svelte component",
+  "version": "0.1.0",
+  "author": "Artur Carvalho",
+  "homepage": "https://github.com/arturcarvalho/svelte-gamepad",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arturcarvalho/svelte-gamepad"
+  },
+  "keywords": [
+    "UI",
+    "gamepad",
+    "svelte",
+    "component"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "npm-run-all": "^4.1.5",
     "rollup": "^1.10.1",

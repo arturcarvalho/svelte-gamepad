@@ -17,7 +17,6 @@
 
   function RTPressed(event) {
     state.buttons["RT"] = event.detail;
-    console.log(event.detail);
     console.log("RT pressed");
   }
 
