@@ -75,7 +75,7 @@ on: DPadUp
 on: DPadDown
 on: DPadLeft
 on: DPadRight
-
+```
 
 ## Sticks
 Each stick gets an object with an x and y in the interval [-1, 1].
@@ -98,7 +98,7 @@ Based on:
 https://github.com/luser/gamepadtest/blob/master/gamepadtest.js
 https://github.com/SBRK/react-gamepad
 
-91% of the browsers. Mobile has more support than desktop 😂.
+91% of the browsers. Mobile has more support than desktop.
 
 # Decisions (higher is more recent)
 
