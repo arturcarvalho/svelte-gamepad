@@ -1,6 +1,5 @@
-# Running server locally
-
-dev server => npm run dev
+# Installation
+> npm install --save svelte-gamepad
 
 # Usage example
 
