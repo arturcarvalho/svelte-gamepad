@@ -1,13 +1,14 @@
 {
   "name": "svelte-gamepad",
   "description": "A Gamepad handler as a Svelte component",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Artur Carvalho",
-  "main": "src/Gamepad.svelte",
+  "svelte": "src/Gamepad.svelte",
+  "main": "index.js",
   "homepage": "https://github.com/arturcarvalho/svelte-gamepad",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arturcarvalho/svelte-gamepad"
+    "url": "https://github.com/arturcarvalho/svelte-gamepad.git"
   },
   "files": [
     "src/layouts",
